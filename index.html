@@ -26,6 +26,21 @@
             const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
             outputElement.textContent = hashHex;
         }
+
+        function copyHashToClipboard() {
+            const hashText = document.getElementById('hashOutput').textContent;
+
+            if (!hashText || hashText.startsWith("Error")) {
+                alert("Nothing to copy. Please generate a valid hash first.");
+                return;
+            }
+
+            navigator.clipboard.writeText(hashText).then(() => {
+                alert("Hash copied to clipboard!");
+            }).catch(() => {
+                alert("Failed to copy hash to clipboard.");
+            });
+        }
     </script>
 </head>
 <body>
@@ -34,8 +49,10 @@
 	<br><br>
     <input type="text" id="textInput" placeholder="Type something..." style="width: 400px;">
     <br><br>
-    <button onclick="generateHash()">Generate SHA-256</button>
-    <h3>Hash:</h3>
+    <button onclick="generateHash()">Generate Hash</button>
+    <br><br>
+    <button onclick="copyHashToClipboard()">Copy Hash to Clipboard</button>
+    <h3>SHA-256 Hash:</h3>
     <p id="hashOutput" style="color: red;"></p>
 </body>
 </html>
