@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHA-256 Hash Generator</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+    </style>
+    <script>
+        async function generateHash() {
+            const inputText = document.getElementById('textInput').value;
+            const outputElement = document.getElementById('hashOutput');
+
+            if (!inputText.trim()) {
+                outputElement.textContent = "Error: Please enter valid text.";
+                return;
+            }
+
+            const encoder = new TextEncoder();
+            const data = encoder.encode(inputText);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+            outputElement.textContent = hashHex;
+        }
+    </script>
+</head>
+<body>
+    <h3>SHA-256 Hash Generator</h3>
+    <label for="textInput">Enter text:</label>
+	<br><br>
+    <input type="text" id="textInput" placeholder="Type something..." style="width: 400px;">
+    <br><br>
+    <button onclick="generateHash()">Generate SHA-256</button>
+    <h3>Hash:</h3>
+    <p id="hashOutput" style="color: red;"></p>
+</body>
+</html>
