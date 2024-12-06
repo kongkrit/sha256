@@ -7,6 +7,24 @@
     <style>
         body {
             font-family: sans-serif;
+            text-align: center;
+        }
+        #textInput {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            height: 40px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
         }
     </style>
     <script>
@@ -46,13 +64,14 @@
 <body>
     <h3>SHA-256 Hash Generator</h3>
     <label for="textInput">Enter text:</label>
-	<br><br>
-    <input type="text" id="textInput" placeholder="Type something..." style="width: 400px;">
     <br><br>
-    <button onclick="generateHash()">Generate Hash</button>
+    <input type="text" id="textInput" placeholder="Type something...">
     <br><br>
-    <button onclick="copyHashToClipboard()">Copy Hash to Clipboard</button>
-    <h3>SHA-256 Hash:</h3>
+    <div class="button-container">
+        <button onclick="generateHash()">Generate SHA-256</button>
+        <button onclick="copyHashToClipboard()">Copy Hash to Clipboard</button>
+    </div>
+    <h3>Hash:</h3>
     <p id="hashOutput" style="color: red;"></p>
 </body>
 </html>
